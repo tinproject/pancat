@@ -312,7 +312,7 @@ class FinCat(object):
                     raise ValueError("El campo %s no se encuentra en la definición del registro") % field
             self.columns = fields
         else: #all fields
-            self.columns = self.record_def_dict.keys() #error iterator??
+            self.columns = self.record_def_dict.keys()
 
         # numpy dtypes
         self.dtypes=[]

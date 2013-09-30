@@ -17,7 +17,7 @@ def read_cat_as_dataframe(fichero_cat, tipo_registro, columns=None):
     """
     reg_def = FinCat(tipo_registro, columns)
     cat_gen = line_generator(fichero_cat, encoding='latin1')
-    return pd.DataFrame.from_records(list(tuple_record_generator(reg_def, cat_gen)), columns=columns)
+    return pd.DataFrame.from_records(list(tuple_record_generator(reg_def, cat_gen)), columns=reg_def.columns)
 
 def read_cat_as_ndframe(fichero_cat, tipo_registro, columns=None):
     """
@@ -31,12 +31,13 @@ def read_cat_as_ndframe(fichero_cat, tipo_registro, columns=None):
 
     # count number of registers. Two pass strategy.
     count=0
-    cat_gen = line_generator(fichero_cat)
-    for reg in cat_gen:
+    count_gen = line_generator(fichero_cat, encoding='latin1')
+    for reg in count_gen:
         if reg_def.is_record(reg):
             count += 1
 
-    cat_gen = line_generator(fichero_cat, encoding='latin1')
+    line_gen = line_generator(fichero_cat, encoding='latin1')
+    cat_gen = tuple_record_generator(reg_def, line_gen)
     dtypes = list(zip(reg_def.columns, reg_def.dtypes))
     ndarray = np.empty(count, dtype=dtypes, order='F')
     nrec = 0
@@ -49,6 +50,5 @@ def read_cat_as_ndframe(fichero_cat, tipo_registro, columns=None):
             break;
         ndarray[nrec] = record
         nrec += 1
-
     return ndarray
 
