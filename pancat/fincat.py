@@ -343,3 +343,16 @@ class FinCat(object):
                 end = start + width
                 fields.append(func(record[start:end]))
         return fields
+
+    def to_dict(self, record):
+        """
+            Convierte un registro a un diccionario con los campos.
+        """
+        fields = {}
+        if self.is_record(record):
+            for name in self.columns:
+                start, width, func, _ = self.record_def_dict[name]
+                start -= 1
+                end = start + width
+                fields[name] = func(record[start:end])
+        return fields
