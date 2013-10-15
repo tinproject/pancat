@@ -49,4 +49,14 @@ def tuple_record_generator(record_def, line_iterable):
             yield record_def.to_tuple(line)
 
 
+def dict_record_generator(record_def, line_iterable):
+    """
+        Returns a generator of dicts of fields according to the records definition object
 
+        - record_def: Record definition object that comply to the api is_record and to_tuple
+        - line_iterable: Collection of text lines representing records
+    """
+
+    for line in line_iterable:
+        if record_def.is_record(line):
+            yield record_def.to_dict(line)
