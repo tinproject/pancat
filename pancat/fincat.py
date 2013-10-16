@@ -111,7 +111,7 @@ registro_de_finca = {
     'nombre_paraje': (266, 30, texto, 'U30'),
     # datos físicos
     'superficie_parcela': (296, 10, numero_entero, 'U8'),
-    'superficie_construida_total': (306, 7, numero_entero, 'U8'),
+    'superficie_construida': (306, 7, numero_entero, 'U8'),
     'superficie_construida_sobre_rasante': (313, 7, numero_entero, 'U8'),
     'superficie_construida_bajo_rasante': (320, 7, numero_entero, 'U8'),
     'superficie_cubierta': (327, 7, numero_entero, 'U8'),
